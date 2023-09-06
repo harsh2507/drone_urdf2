@@ -4,6 +4,15 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
   name="drone_urdf2">
+
+  <link name="world"/>
+
+  <joint name="base_joint" type="fixed">
+	<parent link="world"/>
+	<child link="base_link"/>
+	<origin rpy="0 0 3.142" xyz="0.0 0.0 0.0"/>
+  </joint>
+
   <link
     name="base_link">
     <inertial>
@@ -45,7 +54,7 @@
     </collision>
   </link>
   <link
-    name="Link_1">
+    name="link_1">
     <inertial>
       <origin
         xyz="-5.4113063752137E-09 -2.5924262458954E-08 2.04494028932523E-08"
@@ -103,7 +112,7 @@
       velocity="0" />
   </joint>
   <link
-    name="Link_2">
+    name="link_2">
     <inertial>
       <origin
         xyz="-0.000255100242262468 -0.0338251910857813 -0.0554553521915526"
@@ -161,7 +170,7 @@
       velocity="0" />
   </joint>
   <link
-    name="Link_3">
+    name="link_3">
     <inertial>
       <origin
         xyz="-0.000427471788521899 0.0339711317114997 -0.0537203104105317"
@@ -219,7 +228,7 @@
       velocity="0" />
   </joint>
   <link
-    name="Link_4">
+    name="link_4">
     <inertial>
       <origin
         xyz="-5.86360249243967E-09 2.59206679453783E-08 -2.03252708552704E-08"
@@ -277,7 +286,7 @@
       velocity="0" />
   </joint>
   <link
-    name="Link_5">
+    name="link_5">
     <inertial>
       <origin
         xyz="-0.000249700404364062 -0.0338251995515797 -0.0554553886807976"
@@ -323,9 +332,9 @@
       xyz="0.00029134 -0.16534 0.05837"
       rpy="0 0 0" />
     <parent
-      link="Link_4" />
+      link="link_4" />
     <child
-      link="Link_5" />
+      link="link_5" />
     <axis
       xyz="0.01131 0 0.99994" />
     <limit
@@ -335,7 +344,7 @@
       velocity="0" />
   </joint>
   <link
-    name="Link_6">
+    name="link_6">
     <inertial>
       <origin
         xyz="0.000757409969281642 0.0337775856601109 -0.0554507224627409"
@@ -381,9 +390,9 @@
       xyz="-0.00078724 0.1654 0.058369"
       rpy="0 0 0" />
     <parent
-      link="Link_4" />
+      link="link_4" />
     <child
-      link="Link_6" />
+      link="link_6" />
     <axis
       xyz="-0.0072518 0 0.99997" />
     <limit
@@ -392,4 +401,117 @@
       effort="0"
       velocity="0" />
   </joint>
+
+<transmission name="link_1_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_1">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_1_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <transmission name="link_2_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_2">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_2_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <transmission name="link_3_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_3">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_3_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <transmission name="link_4_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_4">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_4_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <transmission name="link_5_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_5">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_5_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <transmission name="link_6_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_6">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_6_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <transmission name="link_7_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="joint_7">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="link_7_motor">
+		<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+  </transmission>
+
+  <gazebo>
+	<plugin name="control" filename="libgazebo_ros_control.so">
+		<robotNamespace>/</robotNamespace>
+	</plugin>
+  </gazebo>
+
+  <gazebo reference="link_1">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="link_2">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="link_3">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="link_4">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="link_5">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="link_6">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="link_7">
+	<selfCollide>true</selfCollide>
+  </gazebo>
+
+
 </robot>
